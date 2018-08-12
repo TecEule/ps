@@ -1,0 +1,2 @@
+[b,n] [Parentnodename] [Childnodename] [neuer Wert]
+[l] [Parentnodename] [Childnodename]
