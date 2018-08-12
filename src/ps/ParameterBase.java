@@ -22,8 +22,6 @@ import org.xml.sax.SAXException;
 
 public class ParameterBase {
 
-	// Test commit
-	
 	protected static String Input = "";
 	protected static String XmlPath = "";
 	protected static int MaxAttributID = 0;
@@ -201,21 +199,27 @@ public class ParameterBase {
 
 	}
 
-	private void getXmlPath() {
+	public static String getXmlPath() {
 
+		String tmp = "";
 		try {
-			String path = ParameterBase.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+			String path = System.getProperty("user.dir"); //
+			// ParameterBase.class.getProtectionDomain().getCodeSource().getLocation().toString(); //.getPath();
 			XmlPath = path;
 
-			XmlPath += "ks_Parameter.xml";
+			XmlPath += "//ini//ks_Parameter.xml";
+			tmp = XmlPath;
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
+		return tmp;
 	}
 
 	@SuppressWarnings("unused")
-	public String getParameterValue(String tagName, String childNode) {
+	public static String getParameterValue(String tagName, String childNode) {
+		
+		getXmlPath();
 		String wert = "";
 
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -252,21 +256,25 @@ public class ParameterBase {
 
 	@SuppressWarnings("unused")
 	public static void deleteParameterValue(String tagName, String childNode) {
+		getXmlPath();
 		ParameterDelete.deleteParameterValue(tagName, childNode);
 	}
 
 	@SuppressWarnings("unused")
 	public static void addParameterValue(String tagName, String childNode, String newValue) {
+		getXmlPath();
 		ParameterAdd.addParameterValue(tagName, childNode, newValue);
 	}
 
 	@SuppressWarnings("unused")
 	public static void addParameterParent(String tagName, String parentNode) {
+		getXmlPath();
 		ParameterAdd.addParameterParent(tagName, parentNode);
 	}
 
 	@SuppressWarnings("unused")
 	public static Boolean setParameterValue(String tagName, String childNode, String newValue) {
+		getXmlPath();
 		return ParameterChange.setParameterValue(tagName, childNode, newValue);
 	}
 }
